@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vireo Pulse — Customer Operations Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <div class="app-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-badge">VP</div>
+        <div class="brand-info">
+          <h2>VIREO PULSE</h2>
+          <span class="brand-tag">CX Operations Intelligence</span>
+        </div>
+      </div>
+
+      <div class="sidebar-status">
+        <span class="status-indicator"></span>
+        <span>11,641 Tickets Audited (Jan 25–Jun 26)</span>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-section-label">OPERATIONS &amp; STRATEGY</div>
+        <button class="nav-item active" onclick="navigate('overview')">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">Executive Summary</span>
+        </button>
+        <button class="nav-item" onclick="navigate('workload')">
+          <span class="nav-icon">🔄</span>
+          <span class="nav-text">Workload &amp; Routing</span>
+        </button>
+        <button class="nav-item" onclick="navigate('performance')">
+          <span class="nav-icon">⏱️</span>
+          <span class="nav-text">SLA &amp; Choke Points</span>
+        </button>
+
+        <div class="nav-section-label">DECISION ENGINES</div>
+        <button class="nav-item" onclick="navigate('sandbox')">
+          <span class="nav-icon">⚡</span>
+          <span class="nav-text">AI Triage Studio</span>
+          <span class="nav-pill">Live</span>
+        </button>
+        <button class="nav-item" onclick="navigate('simulator')">
+          <span class="nav-icon">🧮</span>
+          <span class="nav-text">Headcount &amp; ROI Simulator</span>
+        </button>
+        <button class="nav-item" onclick="navigate('memo')">
+          <span class="nav-icon">📄</span>
+          <span class="nav-text">Priya's Executive Memo</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-meta">
+          <div class="meta-row">
+            <span>Roster:</span>
+            <strong>44 Agents (BLR + IDR)</strong>
+          </div>
+          <div class="meta-row">
+            <span>Timezone Normalization:</span>
+            <strong class="text-green">+5.5h Active</strong>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- Top Header Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 id="page-title">Executive Summary</h1>
+          <p id="page-subtitle">Strategic headcount allocation and root-cause analysis for Priya Raman &amp; Arjun Mehta</p>
+        </div>
+        <div class="topbar-actions">
+          <div class="date-badge">18 Months: Jan 2025 – Jun 2026</div>
+          <button class="action-btn" onclick="navigate('memo')">
+            <span>📥</span> View Executive Memo
+          </button>
+        </div>
+      </header>
+
+      <!-- View 1: Executive Overview -->
+      <div id="view-overview" class="view-panel active">
+        
+        <!-- Strategic Decision Banner -->
+        <div class="hero-decision-card">
+          <div class="hero-header">
+            <div class="hero-badge">DECISION SUMMARY</div>
+            <div class="hero-action-pill">RECOMMENDATION: 2 HIRES TO LOGISTICS</div>
+          </div>
+          <div class="hero-body">
+            <div class="hero-main-stat">
+              <h2>The "Billing Illusion" Uncovered</h2>
+              <p>Priya Raman's hypothesis: <em>"Whichever team has the most volume gets the next two hires. Billing is our biggest queue at 22%."</em></p>
+            </div>
+            <div class="comparison-grid">
+              <div class="comp-box comp-intake">
+                <div class="comp-label">Intake Assigned Volume</div>
+                <div class="comp-value">2,425 <span class="comp-unit">(20.8%)</span></div>
+                <p>Chatbot tagged messages as Billing &amp; Payments based on simple words like "paid" or "deducted".</p>
+              </div>
+              <div class="comp-arrow">➔</div>
+              <div class="comp-box comp-resolved">
+                <div class="comp-label">Actually Resolved Workload</div>
+                <div class="comp-value text-red">1,798 <span class="comp-unit">(15.4%)</span></div>
+                <p><strong>-25.9% Drop:</strong> 696+ tickets were delivery delays transferred to Logistics after agent triage.</p>
+              </div>
+              <div class="comp-arrow">➔</div>
+              <div class="comp-box comp-logistics">
+                <div class="comp-label">Logistics Reality</div>
+                <div class="comp-value text-green">2,574 <span class="comp-unit">(22.1%)</span></div>
+                <p><strong>+35.1% Surge:</strong> Logistics handles 515 tickets/agent with a crippling 25.1 hr median resolution delay.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-icon">📑</span>
+              <span class="metric-title">Audited Tickets</span>
+            </div>
+            <div class="metric-value" id="kpi-total-tickets">11,641</div>
+            <div class="metric-caption">100% data audit across 18 months</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-icon">🔀</span>
+              <span class="metric-title">Misrouted Intake Leak</span>
+            </div>
+            <div class="metric-value text-amber" id="kpi-misrouted-tickets">1,964</div>
+            <div class="metric-caption">16.9% of desk volume misclassified</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-icon">📦</span>
+              <span class="metric-title">Billing → Logistics Bounces</span>
+            </div>
+            <div class="metric-value text-red" id="kpi-bounce-count">696</div>
+            <div class="metric-caption">+17.8 hr resolution delay on bounce</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-icon">💰</span>
+              <span class="metric-title">Quarterly Process Waste</span>
+            </div>
+            <div class="metric-value text-green" id="kpi-quarterly-waste">Rs 1.22 Lakh</div>
+            <div class="metric-caption">Transfer overhead + SLA breach credits</div>
+          </div>
+        </div>
+
+        <!-- Stakeholder Perspectives Alignment Matrix -->
+        <div class="stakeholder-card">
+          <div class="section-title-wrap">
+            <h3>Stakeholder Alignment Matrix</h3>
+            <span class="tag">Executive Consensus</span>
+          </div>
+          <div class="stakeholder-grid">
+            <div class="stakeholder-item">
+              <div class="stakeholder-avatar">PR</div>
+              <div class="stakeholder-details">
+                <h4>Priya Raman <span>Head of Customer Experience</span></h4>
+                <p class="quote">"I want to know where to add headcount. Whichever team has the most volume gets the next two hires."</p>
+                <div class="stakeholder-verdict verdict-blue">
+                  <strong>Resolution:</strong> Shift focus from raw intake tickets to true resolution effort. Placing hires in Logistics relieves the actual operational crisis.
+                </div>
+              </div>
+            </div>
+
+            <div class="stakeholder-item">
+              <div class="stakeholder-avatar">NK</div>
+              <div class="stakeholder-details">
+                <h4>Neha Kulkarni <span>Support Operations Manager</span></h4>
+                <p class="quote">"Billing keep telling me half their queue isn't theirs... it's Logistics who are actually drowning."</p>
+                <div class="stakeholder-verdict verdict-green">
+                  <strong>Resolution:</strong> Data validates Neha 100%. 47.4% of Billing's queue is shipping complaints, and Logistics resolution time is 25.1 hours.
+                </div>
+              </div>
+            </div>
+
+            <div class="stakeholder-item">
+              <div class="stakeholder-avatar">AM</div>
+              <div class="stakeholder-details">
+                <h4>Arjun Mehta <span>Finance Controller</span></h4>
+                <p class="quote">"Two hires is about Rs 9 lakh a year. I'd rather fix a process than hire into it if that's an option."</p>
+                <div class="stakeholder-verdict verdict-amber">
+                  <strong>Resolution:</strong> AI auto-routing saves Rs 4.89 Lakh/yr in transfer friction, offsetting more than half the Rs 9 Lakh hiring budget.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Site & Channel Distribution -->
+        <div class="meta-distribution-grid">
+          <div class="meta-card">
+            <h4>Desk Support by Site</h4>
+            <div class="meta-bar-item">
+              <div class="meta-bar-label"><span>Bengaluru HQ (Tier 1 &amp; 2)</span> <strong>8,273 tickets (71%)</strong></div>
+              <div class="meta-bar"><div class="meta-bar-fill fill-blue" style="width: 71%;"></div></div>
+            </div>
+            <div class="meta-bar-item">
+              <div class="meta-bar-label"><span>Indore Operations (24x7 Night)</span> <strong>3,368 tickets (29%)</strong></div>
+              <div class="meta-bar"><div class="meta-bar-fill fill-purple" style="width: 29%;"></div></div>
+            </div>
+          </div>
+
+          <div class="meta-card">
+            <h4>Volume by Channel</h4>
+            <div class="channel-pills">
+              <div class="chan-pill">
+                <span class="chan-name">💬 Chat (24x7)</span>
+                <span class="chan-count">5,290 (45.4%)</span>
+              </div>
+              <div class="chan-pill">
+                <span class="chan-name">✉️ Email (24x7)</span>
+                <span class="chan-count">3,527 (30.3%)</span>
+              </div>
+              <div class="chan-pill">
+                <span class="chan-name">📞 Voice Callbacks</span>
+                <span class="chan-count">1,702 (14.6%)</span>
+              </div>
+              <div class="chan-pill">
+                <span class="chan-name">📱 Social Channels</span>
+                <span class="chan-count">1,122 (9.6%)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- View 2: Workload & Routing -->
+      <div id="view-workload" class="view-panel">
+        
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Monthly Team Volume: Intake Queue vs. Resolved Workload</h3>
+              <p>Visualizing the 25.9% Billing phantom queue drop against the 35.1% Logistics surge over 18 months.</p>
+            </div>
+            <div class="segmented-control">
+              <button class="seg-btn active" onclick="setTeamChartMode('both', this)">Compare Both</button>
+              <button class="seg-btn" onclick="setTeamChartMode('assigned', this)">Intake Only</button>
+              <button class="seg-btn" onclick="setTeamChartMode('resolved', this)">Resolved Only</button>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="teamComparisonChart"></canvas>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>18-Month Category Trend (Jan 2025 – Jun 2026)</h3>
+              <p>Monthly volume breakdown across all 11 official support categories.</p>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+
+        <div class="panel-card leak-card">
+          <div class="leak-header">
+            <span class="leak-icon">⚠️</span>
+            <div>
+              <h4>The 696-Ticket Leak: Billing to Logistics Hand-off Breakdown</h4>
+              <p>Under Vireo's operating policy (§4), every internal transfer incurs <strong>Rs 305</strong> in re-handling costs.</p>
+            </div>
+          </div>
+          <div class="leak-metrics">
+            <div class="leak-stat">
+              <span>Transferred Tickets:</span>
+              <strong>696 tickets</strong>
+            </div>
+            <div class="leak-stat">
+              <span>Avoidable Transfer Overhead:</span>
+              <strong class="text-amber">Rs 2,12,280</strong>
+            </div>
+            <div class="leak-stat">
+              <span>Customer Resolution Penalty:</span>
+              <strong class="text-red">+17.8 hours delay</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- View 3: SLA & Choke Points -->
+      <div id="view-performance" class="view-panel">
+        
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Team Workload, Throughput &amp; SLA Compliance Table</h3>
+              <p>Actual operational burden on the 44-agent desk.</p>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Team</th>
+                  <th>Agents</th>
+                  <th>Intake Assigned</th>
+                  <th>Actually Resolved</th>
+                  <th>Net Volume Shift</th>
+                  <th>Tickets / Agent</th>
+                  <th>Median Resolution</th>
+                  <th>SLA Breaches</th>
+                  <th>Breach Rate</th>
+                </tr>
+              </thead>
+              <tbody id="workload-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="split-charts-grid">
+          <div class="panel-card">
+            <div class="panel-header">
+              <div>
+                <h4>Median Resolution Time by Team (Hours)</h4>
+                <p>Logistics takes 25.1 hrs vs Billing at 41 mins</p>
+              </div>
+            </div>
+            <div class="chart-container-sm">
+              <canvas id="resolutionTimeChart"></canvas>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header">
+              <div>
+                <h4>SLA Breach Rate by Team (%)</h4>
+                <p>Logistics leads with 16.4% breach rate</p>
+              </div>
+            </div>
+            <div class="chart-container-sm">
+              <canvas id="slaBreachChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- View 4: AI Triage Studio (Live Sandbox) -->
+      <div id="view-sandbox" class="view-panel">
+        
+        <div class="sandbox-wrapper">
+          <div class="sandbox-top">
+            <div class="sandbox-title-wrap">
+              <span class="badge badge-purple">LIVE AI INFERENCE ENGINE</span>
+              <h2>AI Ticket Auto-Categorization &amp; Routing Sandbox</h2>
+              <p>Test real customer complaints to evaluate how the AI disambiguates delivery inquiries from genuine billing disputes.</p>
+            </div>
+
+            <div class="preset-pills-bar">
+              <span class="pills-title">Click to test scenario:</span>
+              <button class="test-pill" onclick="loadSampleTicket(1)">"Paid 5 days ago, nothing in hand" (Misrouted Leak)</button>
+              <button class="test-pill" onclick="loadSampleTicket(2)">"Charged twice for same order" (Genuine Billing)</button>
+              <button class="test-pill" onclick="loadSampleTicket(3)">"Need bill with GSTIN number" (Genuine Billing)</button>
+              <button class="test-pill" onclick="loadSampleTicket(4)">"Left bud battery dying in 25 mins" (Charging)</button>
+              <button class="test-pill" onclick="loadSampleTicket(5)">"Earbuds keep unpairing from phone" (Connectivity)</button>
+            </div>
+          </div>
+
+          <div class="sandbox-layout">
+            <!-- Left Input -->
+            <div class="sandbox-input-box">
+              <div class="field-wrap">
+                <label>Legacy Intake Tag (Set by Keyword Bot):</label>
+                <select id="sandbox-bot-tag" class="styled-select">
+                  <option value="Billing & Payments" selected>Billing &amp; Payments (Legacy Bot Tag)</option>
+                  <option value="Delivery & Shipping">Delivery &amp; Shipping</option>
+                  <option value="Returns & Refunds">Returns &amp; Refunds</option>
+                  <option value="Warranty & Repair">Warranty &amp; Repair</option>
+                  <option value="Connectivity">Connectivity</option>
+                  <option value="Charging & Battery">Charging &amp; Battery</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="field-wrap">
+                <label>Customer Opening Message:</label>
+                <textarea id="sandbox-input-msg" class="styled-textarea" rows="5" placeholder="Enter customer opening message or paste email transcript..."></textarea>
+              </div>
+
+              <button class="run-inference-btn" id="btn-run-classifier" onclick="executeClassification()">
+                <span>⚡</span> Run AI Classification &amp; Routing
+              </button>
+            </div>
+
+            <!-- Right Output Display -->
+            <div class="sandbox-output-box">
+              <div id="out-placeholder" class="out-placeholder">
+                <div class="placeholder-icon">🤖</div>
+                <h4>Awaiting Input</h4>
+                <p>Click any test pill above or type a customer message to see the AI classification and evidence extraction.</p>
+              </div>
+
+              <div id="out-results" class="out-results" style="display: none;">
+                <div class="res-card-top">
+                  <div>
+                    <span class="res-meta-label">PREDICTED CATEGORY</span>
+                    <h3 id="res-cat-title" class="res-category">Delivery &amp; Shipping</h3>
+                  </div>
+                  <div id="res-routing-badge" class="routing-badge">Route to Logistics</div>
+                </div>
+
+                <div class="meter-wrap">
+                  <div class="meter-labels">
+                    <span>Model Confidence:</span>
+                    <strong id="res-conf-num">92%</strong>
+                  </div>
+                  <div class="meter-track">
+                    <div id="res-conf-bar" class="meter-bar" style="width: 92%;"></div>
+                  </div>
+                </div>
+
+                <div class="evidence-section">
+                  <span class="res-meta-label">EXTRACTED EVIDENCE QUOTE:</span>
+                  <div id="res-evidence-quote" class="evidence-quote">"5 days and counting"</div>
+                </div>
+
+                <div class="reasoning-section">
+                  <span class="res-meta-label">DECISION REASONING:</span>
+                  <p id="res-reasoning-text" class="reasoning-text">Identified shipment delay complaint misclassified by intake bot.</p>
+                </div>
+
+                <div id="res-uncertain-alert" class="uncertain-banner" style="display: none;">
+                  ⚠️ <strong>Uncertainty Flag Active:</strong> Confidence is below safety threshold (<75%). Ticket flagged for senior agent human triage.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- View 5: Headcount & ROI Simulator -->
+      <div id="view-simulator" class="view-panel">
+        
+        <div class="panel-card">
+          <div class="panel-header">
+            <div>
+              <h3>Interactive Headcount &amp; Process ROI Simulator</h3>
+              <p>Model the operational and financial impact for Priya Raman and Arjun Mehta before signing off on hires.</p>
+            </div>
+          </div>
+
+          <div class="sim-scenarios-bar">
+            <button class="sim-btn" onclick="selectScenario('A', this)">
+              <span class="sim-btn-tag">Scenario A</span>
+              <strong>Hire 2 into Billing</strong>
+              <small>Priya's Initial Plan</small>
+            </button>
+            <button class="sim-btn active" onclick="selectScenario('B', this)">
+              <span class="sim-btn-tag">Scenario B (Recommended)</span>
+              <strong>Hire 2 into Logistics</strong>
+              <small>Data-Driven Allocation</small>
+            </button>
+            <button class="sim-btn" onclick="selectScenario('C', this)">
+              <span class="sim-btn-tag">Scenario C</span>
+              <strong>AI Auto-Routing Only</strong>
+              <small>Process Fix First</small>
+            </button>
+            <button class="sim-btn" onclick="selectScenario('D', this)">
+              <span class="sim-btn-tag">Scenario D (Combined)</span>
+              <strong>AI Routing + 2 Hires to Logistics</strong>
+              <small>Maximum ROI</small>
+            </button>
+          </div>
+
+          <div class="sim-results-grid">
+            <div class="sim-card">
+              <h4>Logistics Median Resolution</h4>
+              <div id="sim-res-time" class="sim-number text-green">7.8 hrs</div>
+              <p id="sim-res-desc">Slashed from 25.1 hours to under 8 hours. Customers receive same-day delivery updates.</p>
+            </div>
+
+            <div class="sim-card">
+              <h4>Logistics Workload / Agent</h4>
+              <div id="sim-workload" class="sim-number text-blue">367 tickets</div>
+              <p id="sim-workload-desc">Workload drops by 29% from 515 down to 367 tickets/agent, resolving burnout.</p>
+            </div>
+
+            <div class="sim-card">
+              <h4>Avoidable Friction Savings</h4>
+              <div id="sim-savings" class="sim-number text-green">Rs 4.89 Lakh / yr</div>
+              <p id="sim-savings-desc">1,200+ avoidable transfers (Rs 305/xfer) and SLA credits eliminated.</p>
+            </div>
+
+            <div class="sim-card highlight-card">
+              <h4>Arjun Mehta's Net Financial Case</h4>
+              <div id="sim-net-roi" class="sim-number text-purple">Net -Rs 4.10 Lakh / yr</div>
+              <p id="sim-net-desc">Savings offset more than half the Rs 9L hiring budget. Full desk stability achieved.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- View 6: Executive Memo -->
+      <div id="view-memo" class="view-panel">
+        <div class="panel-card memo-card">
+          <div class="memo-header-actions">
+            <div>
+              <span class="badge badge-blue">FORMAL MEMORANDUM</span>
+              <h3>One-Page Executive Memo to Priya Raman</h3>
+            </div>
+            <button class="action-btn" onclick="window.print()">
+              <span>🖨️</span> Print / Save PDF
+            </button>
+          </div>
+          <div class="memo-body" id="memo-content-container">
+            <!-- Dynamically populated or rendered -->
+            <p>Loading executive memo...</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

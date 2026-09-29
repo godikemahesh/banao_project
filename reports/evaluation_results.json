@@ -1,0 +1,43 @@
+{
+  "sample_size": 1000,
+  "bot_accuracy_%": 70.8,
+  "ai_accuracy_%": 80.0,
+  "accuracy_gain_%": 9.2,
+  "uncertainty_rate_%": 8.7,
+  "billing_category": {
+    "bot_baseline": {
+      "precision_%": 49.78,
+      "recall_%": 89.06,
+      "f1_score_%": 63.87,
+      "tp": 114,
+      "fp": 115,
+      "fn": 14
+    },
+    "ai_classifier": {
+      "precision_%": 79.02,
+      "recall_%": 88.28,
+      "f1_score_%": 83.39,
+      "tp": 113,
+      "fp": 30,
+      "fn": 15
+    }
+  },
+  "delivery_category": {
+    "bot_baseline": {
+      "precision_%": 87.82,
+      "recall_%": 42.41,
+      "f1_score_%": 57.2,
+      "tp": 137,
+      "fp": 19,
+      "fn": 186
+    },
+    "ai_classifier": {
+      "precision_%": 86.79,
+      "recall_%": 75.23,
+      "f1_score_%": 80.6,
+      "tp": 243,
+      "fp": 37,
+      "fn": 80
+    }
+  }
+}
